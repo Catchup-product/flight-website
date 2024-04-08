@@ -18,14 +18,14 @@ const TequilaState = (props) => {
   }) => {
     const response = await fetch(
       HOST +
-      "/search?fly_from=" +
-      flyFrom +
-      "&fly_to=" +
-      flyTo +
-      "&date_from=" +
-      dateFrom +
-      "&date_to=" +
-      dateTo,
+        "/v2/search?fly_from=" +
+        flyFrom +
+        "&fly_to=" +
+        flyTo +
+        "&date_from=" +
+        dateFrom +
+        "&date_to=" +
+        dateTo,
       {
         method: "GET",
         headers: {
@@ -52,14 +52,14 @@ const TequilaState = (props) => {
   }) => {
     const response = await fetch(
       HOST +
-      "/booking/check_flights?booking_token=" +
-      bookingToken +
-      "&bnum=" +
-      bags +
-      "&adults=" +
-      adults +
-      "&children=" +
-      children,
+        "/v2/booking/check_flights?booking_token=" +
+        bookingToken +
+        "&bnum=" +
+        bags +
+        "&adults=" +
+        adults +
+        "&children=" +
+        children,
       "&infants=" + infants,
       "&session_id=" + sessionId,
       {
