@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TequilaContext from "./TequilaContext";
 
 const TequilaState = (props) => {
-  const HOST = "https://api.tequila.kiwi.com/v2";
+  const HOST = "https://api.tequila.kiwi.com";
 
   const [routeData, setRouteData] = useState([]);
   const [fligthData, setFligthData] = useState(null);
@@ -18,7 +18,7 @@ const TequilaState = (props) => {
   }) => {
     const response = await fetch(
       HOST +
-        "/search?fly_from=" +
+        "/v2/search?fly_from=" +
         flyFrom +
         "&fly_to=" +
         flyTo +
@@ -52,7 +52,7 @@ const TequilaState = (props) => {
   }) => {
     const response = await fetch(
       HOST +
-        "/booking/check_flights?booking_token=" +
+        "/v2/booking/check_flights?booking_token=" +
         bookingToken +
         "&bnum=" +
         bags +
