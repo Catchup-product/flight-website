@@ -6,6 +6,7 @@ const TequilaState = (props) => {
 
   const [routeData, setRouteData] = useState([]);
   const [fligthData, setFligthData] = useState(null);
+  const [airportSuggestions, setAirportSuggestions] = useState([]);
 
   // Search Itinery
   const searchItinery = async ({
@@ -75,8 +76,35 @@ const TequilaState = (props) => {
     }
   };
 
+  // Airport Suggestions
+  const suggestAirport = async ({ apikey, term }) => {
+    const response = await fetch(
+      HOST + "/locations/query?term=" + term + "&location_types=airports",
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          apikey,
+        },
+      }
+    );
+    const json = await response.json();
+    if (response.status === 200) {
+      setAirportSuggestions(...json.locations);
+    }
+  };
+
   return (
-    <TequilaContext.Provider value={{ searchItinery, checkFlights }}>
+    <TequilaContext.Provider
+      value={{
+        routeData,
+        fligthData,
+        airportSuggestions,
+        searchItinery,
+        checkFlights,
+        suggestAirport,
+      }}
+    >
       {props.children}
     </TequilaContext.Provider>
   );
