@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TequilaContext from "./TequilaContext";
 
 const TequilaState = (props) => {
-  const HOST = "https://api.tequila.kiwi.com/v2";
+  const HOST = "https://api.tequila.kiwi.com";
 
   const [routeData, setRouteData] = useState([]);
   const [fligthData, setFligthData] = useState(null);
@@ -18,14 +18,14 @@ const TequilaState = (props) => {
   }) => {
     const response = await fetch(
       HOST +
-        "/search?fly_from=" +
-        flyFrom +
-        "&fly_to=" +
-        flyTo +
-        "&date_from=" +
-        dateFrom +
-        "&date_to=" +
-        dateTo,
+      "/search?fly_from=" +
+      flyFrom +
+      "&fly_to=" +
+      flyTo +
+      "&date_from=" +
+      dateFrom +
+      "&date_to=" +
+      dateTo,
       {
         method: "GET",
         headers: {
@@ -52,14 +52,14 @@ const TequilaState = (props) => {
   }) => {
     const response = await fetch(
       HOST +
-        "/booking/check_flights?booking_token=" +
-        bookingToken +
-        "&bnum=" +
-        bags +
-        "&adults=" +
-        adults +
-        "&children=" +
-        children,
+      "/booking/check_flights?booking_token=" +
+      bookingToken +
+      "&bnum=" +
+      bags +
+      "&adults=" +
+      adults +
+      "&children=" +
+      children,
       "&infants=" + infants,
       "&session_id=" + sessionId,
       {
@@ -78,8 +78,9 @@ const TequilaState = (props) => {
 
   // Airport Suggestions
   const suggestAirport = async ({ apikey, term }) => {
+    console.log(apikey,term)
     const response = await fetch(
-      HOST + "/locations/query?term=" + term + "&location_types=airports",
+      HOST + "/locations/query?term=" + term ,
       {
         method: "GET",
         headers: {
@@ -88,10 +89,16 @@ const TequilaState = (props) => {
         },
       }
     );
+    console.log("after api")
     const json = await response.json();
+    console.log(json)
     if (response.status === 200) {
-      setAirportSuggestions(...json.locations);
+      return setAirportSuggestions(...json.locations);
     }
+    else{
+      console.log("no response")
+    }
+    console.log("after call")
   };
 
   return (

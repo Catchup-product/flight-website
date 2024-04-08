@@ -1,0 +1,106 @@
+.formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 100px;
+    padding: 10px;
+    background-color: #FFFFFF; /* Adjusted to match the design */
+    border-radius: 10px; /* Larger radius for rounder corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* More prominent shadow */
+  }
+
+.inputWithIcon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+    margin: 0;
+    width: 22%; /* Adjust accordingly for 'From where' and 'Where to' */
+  }
+  
+  .inputFieldShort {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+    margin: 0;
+    width: 15%; /* Adjust accordingly for 'Depart' and 'Return' */
+  }
+  
+  .inputFieldNumber {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+    margin: 0;
+    width: 10%; /* Adjust accordingly for 'Passengers' */
+  }
+  
+  .inputField {
+    padding: 10px 10px 10px 15px; /* Increase left padding to accommodate the larger icon margin */
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    height: 100%;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .inputIcon {
+    margin-left: 15px; /* Increase margin-left as needed */
+  }
+  
+  .inputFieldDateRange {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+    margin: 0;
+    width: 30%; /* Adjusted width for date range input */
+  }  
+  
+  .selectField {
+    flex-grow: 0;
+    width: 180px; /* Slightly wider for the dropdown */
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+    background-color: #f8f9fa; /* Slight background to distinguish dropdown */
+    appearance: none; /* Remove default styling */
+    cursor: pointer;
+  }
+  
+  .searchButton {
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #0056b3; /* Adjusted to match the design */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: none; /* No shadow for button */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .searchButton:hover {
+    background-color: #003d82; /* Darker shade on hover */
+  }
+  
+  /* Add styles for placeholder text color and font if needed */
+  .inputField::placeholder {
+    color: #AAAAAA;
+  }
+  
+  /* Custom styling for focus on inputs */
+  .inputField:focus,
+  .selectField:focus,
+  .searchButton:focus {
+    outline: none;
+    border-color: #0056b3;
+  }
+  
