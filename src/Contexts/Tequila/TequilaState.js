@@ -8,37 +8,23 @@ const TequilaState = (props) => {
   const [fligthData, setFligthData] = useState(null);
   const [airportSuggestions, setAirportSuggestions] = useState([]);
 
-  // Search Itinery
-  const searchItinery = async ({
-    apikey,
-    flyFrom,
-    flyTo,
-    dateFrom,
-    dateTo,
-  }) => {
-    const response = await fetch(
-      HOST +
-        "/v2/search?fly_from=" +
-        flyFrom +
-        "&fly_to=" +
-        flyTo +
-        "&date_from=" +
-        dateFrom +
-        "&date_to=" +
-        dateTo,
-      {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          apikey,
-        },
-      }
-    );
-    const json = await response.json();
-    if (response.status === 200) {
-      setRouteData(...json.data);
-    }
-  };
+// In TequilaState
+const searchItinery = async ({ apikey, flyFrom, flyTo, dateFrom, dateTo }) => {
+  const response = await fetch(`${HOST}/v2/search?fly_from=${flyFrom}&fly_to=${flyTo}&date_from=${dateFrom}&date_to=${dateTo}`, {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      apikey,
+    },
+  });
+
+  const json = await response.json();
+  if (response.status === 200) {
+    return json; // Return the entire JSON response
+  } else {
+    throw new Error(`API request failed with status ${response.status}`);
+  }
+};
 
   // Check Flights
   const checkFlights = async ({
@@ -78,28 +64,28 @@ const TequilaState = (props) => {
 
   // Airport Suggestions
   const suggestAirport = async ({ apikey, term }) => {
-    console.log(apikey,term)
-    const response = await fetch(
-      HOST + "/locations/query?term=" + term ,
-      {
+    try {
+      const response = await fetch(`${HOST}/locations/query?term=${term}`, {
         method: "GET",
         headers: {
-          accept: "application/json",
-          apikey,
+          "accept": "application/json",
+          "apikey": apikey,
         },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
       }
-    );
-    console.log("after api")
-    const json = await response.json();
-    console.log(json)
-    if (response.status === 200) {
-      return setAirportSuggestions(...json.locations);
+  
+      const json = await response.json();
+      console.log(json); // Log to verify the structure
+      return json.locations; // Return the locations part of the response
+    } catch (error) {
+      console.error("Error fetching airport suggestions:", error);
+      return []; // Return an empty array in case of error
     }
-    else{
-      console.log("no response")
-    }
-    console.log("after call")
   };
+  
 
   return (
     <TequilaContext.Provider
