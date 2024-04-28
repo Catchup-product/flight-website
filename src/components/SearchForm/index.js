@@ -25,14 +25,39 @@ const SearchForm = () => {
   });
 
 
+  const [travelers, setTravelers] = useState({
+    adults: 1,
+    children: 0,
+    cabinClass: 'Economy',
+  });
+
+  const handleCabinClassChange = (event) => {
+    setTravelers(prevTravelers => ({
+      ...prevTravelers,
+      cabinClass: event.target.value,
+    }));
+  };
+
+  const incrementCount = (field) => {
+    setTravelers(prevTravelers => ({
+      ...prevTravelers,
+      [field]: prevTravelers[field] + 1,
+    }));
+  };
+
+  const decrementCount = (field) => {
+    setTravelers(prevTravelers => ({
+      ...prevTravelers,
+      [field]: prevTravelers[field] > 0 ? prevTravelers[field] - 1 : 0,
+    }));
+  };
+
 
   const [isLoading, setIsLoading] = useState(false);
   const [airportSuggestions, setAirportSuggestions] = useState([]);
 
   const { fetchAmadeusToken, fetchAirportByName, amadeusToken, flightOffers, fetchFlightOffers, dictionaries } = useContext(TequilaContext);
-  // console.log("hello",flightOffers)
-
-  const [activeField, setActiveField] = useState('origin'); // New state to track active field
+  const [activeField, setActiveField] = useState('origin');
 
 
 
@@ -41,7 +66,7 @@ const SearchForm = () => {
   }, [fetchAmadeusToken]);
 
   const handleAirportSearch = useCallback(debounce(async (input) => {
-    let airportCode = getAirportCodeByName(input) || input; // Fallback to input if name is not found
+    let airportCode = getAirportCodeByName(input) || input; 
     if (airportCode && airportCode.length >= 3) {
       const suggestions = await fetchAirportByName(airportCode);
       setAirportSuggestions(suggestions);
@@ -56,7 +81,7 @@ const SearchForm = () => {
       ...prevParams,
       [name]: value
     }));
-    setActiveField(name); // Set the active field based on which input is being changed
+    setActiveField(name);
     handleAirportSearch(value, name);
   };
 
@@ -64,7 +89,7 @@ const SearchForm = () => {
     setSearchParams(prevParams => ({
       ...prevParams,
       isRoundTrip: event.target.checked,
-      returnDate: event.target.checked ? searchParams.returnDate : null  // Clear return date if unchecked
+      returnDate: event.target.checked ? searchParams.returnDate : null 
     }));
   };
 
@@ -105,7 +130,7 @@ const SearchForm = () => {
     if (departureDate) {
       console.log("dsajd")
       const formattedDepartureDate = format(departureDate, 'yyyy-MM-dd');
-      const formattedReturnDate = returnDate && isRoundTrip ? format(returnDate, 'yyyy-MM-dd') : null
+      const formattedReturnDate = returnDate ? format(returnDate, 'yyyy-MM-dd') : null
 
       await fetchFlightOffers({
         originLocationCode: originCode,
@@ -153,7 +178,7 @@ const SearchForm = () => {
     <div className={styles.searchFormWrapper}>
       <LogoContainer/>
       <form className={styles.formContainer} onSubmit={handleSubmit}>
-      <div className={styles.roundTripContainer}>
+      {/* <div className={styles.roundTripContainer}>
   <input
     type="checkbox"
     checked={searchParams.isRoundTrip}
@@ -161,13 +186,11 @@ const SearchForm = () => {
     className={styles.roundTripCheckbox}
   />
   <label className={styles.roundTripLabel}>Round Trip</label>
-</div>
+</div> */}
 
         <div className={styles.chooseairportDate}>
         <div className={styles.inputWithIcon}>
           <FontAwesomeIcon icon={faPlaneDeparture} className={styles.icons} />
-        
-          
           <input
             ref={originInputRef}
             type="text"
@@ -210,20 +233,14 @@ const SearchForm = () => {
             </div>
           )}
         </div>
-       
-       
-        
-
         <div className={styles.inputWithIcon}>
         <FontAwesomeIcon icon={faCalendarAlt} className={styles.icons} />
           <DatePicker  selected={searchParams.departureDate} onChange={date => setSearchParams(prev => ({ ...prev, departureDate: date }))} placeholderText="Select departure date" className={styles.inputField} />
-
         </div>
-        {searchParams.isRoundTrip && (
+        {searchParams && (
           <div className={styles.inputWithIcon}>
             <FontAwesomeIcon icon={faCalendarAlt} className={styles.icons} />
             <DatePicker
-
               selected={searchParams.returnDate}
               onChange={date => setSearchParams(prev => ({ ...prev, returnDate: date }))}
               placeholderText="Select return date"
@@ -233,6 +250,32 @@ const SearchForm = () => {
 
         )}
         </div>
+
+        <select
+        className={styles.cabinClassSelect}
+        value={travelers.cabinClass}
+        onChange={handleCabinClassChange}
+      >
+        <option value="Economy">Economy</option>
+        <option value="Business">Business</option>
+        <option value="FirstClass">First Class</option>
+      </select>
+      
+      <div className={styles.countInput}>
+        <label>Adults</label>
+        <button onClick={() => decrementCount('adults')}>-</button>
+        <input readOnly value={travelers.adults} />
+        <button onClick={() => incrementCount('adults')}>+</button>
+      </div>
+
+      <div className={styles.countInput}>
+        <label>Children</label>
+        <button onClick={() => decrementCount('children')}>-</button>
+        <input readOnly value={travelers.children} />
+        <button onClick={() => incrementCount('children')}>+</button>
+      </div>
+
+      <button className={styles.applyButton}>Apply</button>
         <button type="submit" className={styles.searchButton}>
           Search
         </button>
@@ -251,8 +294,12 @@ const SearchForm = () => {
           ))}
         </div>
       )}
+
+      
     </div>
   );
 };
+
+
 
 export default SearchForm;
