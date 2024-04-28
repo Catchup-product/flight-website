@@ -170,7 +170,7 @@ const SearchForm = () => {
             className={styles.inputField}
             onFocus={() => setActiveField('origin')} // Set active field when focused
           />
-          {airportSuggestions.length > 0 && activeField === 'origin' && (
+          {airportSuggestions && airportSuggestions.length > 0 && activeField === 'origin' && (
             <div className={styles.suggestionsContainer}>
               {airportSuggestions.map((suggestion, index) => (
                 <div key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)} className={styles.suggestionItem}>
@@ -181,7 +181,7 @@ const SearchForm = () => {
           )}
         </div>
         <div className={styles.inputWithIcon}>
-          <FontAwesomeIcon icon={faPlaneArrival} className={styles.inputIcon} />
+          <FontAwesomeIcon icon={faPlaneArrival}   />
           <input
             ref={destinationInputRef}
             type="text"
@@ -192,7 +192,7 @@ const SearchForm = () => {
             className={styles.inputField}
             onFocus={() => setActiveField('destination')} // Set active field when focused
           />
-          {airportSuggestions.length > 0 && activeField === 'destination' && (
+          {airportSuggestions && airportSuggestions.length > 0 && activeField === 'destination' && (
             <div className={styles.suggestionsContainer}>
               {airportSuggestions.map((suggestion, index) => (
                 <div key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)} className={styles.suggestionItem}>
@@ -231,7 +231,7 @@ const SearchForm = () => {
       )}
 
 
-      {!isLoading && flightOffers.length > 0 && (
+      {!isLoading && flightOffers && flightOffers.length > 0 && (
         <div className={styles.flightOffersContainer}>
           {flightOffers.map((offer) => (
             <FlightCard key={offer.id} offer={offer} dictionaries={dictionaries} />
