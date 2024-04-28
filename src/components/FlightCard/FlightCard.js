@@ -22,21 +22,21 @@ const FlightCard = ({ offer, dictionaries }) => {
     const priceInINR = (offer.price.total * (currencyRate[offer.price.currency] || 1)).toFixed(2);
 
     return (
-        <div className={styles.flightCard}>
+        <div className={`${styles.flightCard} custom-flight-card`}>
             {offer.itineraries.map((itinerary, index) => (
                 <div key={index} className={styles.itinerary}>
-                    <h3>{index === 0 ? 'Outbound Flight' : 'Return Flight'}</h3>
+                    <h3 className="flight-type">{index === 0 ? 'Outbound Flight' : 'Return Flight'}</h3>
                     {itinerary.segments.map((segment, idx) => (
                         <div key={idx} className={styles.segment}>
                             <div className={styles.airlineLogo}>
                                 <img src={airlineLogo} alt={airlineName} />
                             </div>
                             <div className={styles.flightDetails}>
-                                <span><strong>Departure:</strong> {formatTime(segment.departure.at)} ({segment.departure.iataCode})</span>
-                                <span><strong>Arrival:</strong> {formatTime(segment.arrival.at)} ({segment.arrival.iataCode})</span>
-                                <span><strong>Duration:</strong> {formatDuration(segment.duration)}</span>
-                                <span><strong>Flight Number:</strong> {segment.carrierCode} {segment.number}</span>
-                                <span><strong>Aircraft:</strong> {dictionaries.aircraft[segment.aircraft.code]}</span>
+                                <span><strong className="departure">Departure:</strong> {formatTime(segment.departure.at)} ({segment.departure.iataCode})</span>
+                                <span><strong className="arrival">Arrival:</strong> {formatTime(segment.arrival.at)} ({segment.arrival.iataCode})</span>
+                                <span><strong className="duration">Duration:</strong> {formatDuration(segment.duration)}</span>
+                                <span><strong className="flight-number">Flight Number:</strong> {segment.carrierCode} {segment.number}</span>
+                                <span><strong className="aircraft">Aircraft:</strong> {dictionaries.aircraft[segment.aircraft.code]}</span>
                             </div>
                         </div>
                     ))}
@@ -44,7 +44,7 @@ const FlightCard = ({ offer, dictionaries }) => {
             ))}
             <div className={styles.priceDetails}>
                 <div>{`Price: ₹ ${priceInINR}`}</div> {/* Display price in INR */}
-                <button className={styles.selectButton}>Select</button>
+                <button className={`${styles.selectButton} custom-select-button`}>Select</button>
             </div>
         </div>
     );
