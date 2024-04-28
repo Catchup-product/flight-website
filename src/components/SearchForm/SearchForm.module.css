@@ -1,172 +1,186 @@
-.formContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 100px;
-    padding: 50px;
-    background-color: blue; /* Adjusted to match the design */
-    border-radius: 10px; /* Larger radius for rounder corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* More prominent shadow */
-  }
-
-.inputWithIcon {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border: 2px solid #DDDDDD;
-    border-radius: 10px;
-    margin: 0;
-    width: 22%; /* Adjust accordingly for 'From where' and 'Where to' */
-  }
-  
-  .inputFieldShort {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border: 2px solid #DDDDDD;
-    border-radius: 10px;
-    margin: 0;
-    width: 15%; /* Adjust accordingly for 'Depart' and 'Return' */
-  }
-  
-  .inputFieldNumber {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border: 2px solid #DDDDDD;
-    border-radius: 10px;
-    margin: 0;
-    width: 10%; /* Adjust accordingly for 'Passengers' */
-  }
-  
-  .inputField {
-    padding: 10px 10px 10px 15px; /* Increase left padding to accommodate the larger icon margin */
-    font-size: 1rem;
-    border: none;
-    border-radius: 10px;
-    height: 100%;
-    box-sizing: border-box;
-    width: 100%;
-    background: transparent;
-  }
-  .inputIcon {
-    margin-left: 15px; /* Increase margin-left as needed */
-  }
-  
-  .inputFieldDateRange {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border: 2px solid #DDDDDD;
-    border-radius: 10px;
-    margin: 0;
-    width: 30%; /* Adjusted width for date range input */
-  }  
-  
-  .selectField {
-    flex-grow: 0;
-    width: 180px; /* Slightly wider for the dropdown */
-    padding: 10px;
-    font-size: 1rem;
-    border: 2px solid #DDDDDD;
-    border-radius: 10px;
-    background-color: #f8f9fa; /* Slight background to distinguish dropdown */
-    appearance: none; /* Remove default styling */
-    cursor: pointer;
-  }
-  
-  .searchButton {
-    padding: 12px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: #0056b3; /* Adjusted to match the design */
-    color: white;
-    border: none;
-    border-radius: 10px;
-    box-shadow: none; /* No shadow for button */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-  }
-  
-  .searchButton:hover {
-    background-color: #003d82; /* Darker shade on hover */
-  }
-  
-  /* Add styles for placeholder text color and font if needed */
-  .inputField::placeholder {
-    color: #AAAAAA;
-  }
-  
-  /* Custom styling for focus on inputs */
-  .inputField:focus,
-  .selectField:focus,
-  .searchButton:focus {
-    outline: none;
-    border-color: #0056b3;
-  }
-  
-  /* Container for the suggestions, making it appear as a card below the input field */
-  .suggestionsContainer {
-    position: absolute;
-    z-index: 1000;
-    width: 100%;
-    max-height: 300px;
-    overflow-y: auto;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    top: calc(100% + 5px); /* Push it down by the height of the input border */
-    left: 0;
-  }
-  
-
-/* Individual suggestion items */
-.suggestionItem {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  color: black;
+/* Adjustments to form container */
+.searchFormWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 33, 71, 0.8);
 }
 
-.suggestionItem:last-child {
-  border-bottom: none;
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+  
+  /* Dark blue background with 30% transparency */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  color: #fff; /* White text color */
+}
+
+.chooseairportDate {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+}
+
+/* Input container */
+.inputWithIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: calc(50% - 20px); /* Adjusted width for better spacing */
+}
+
+/* Input field */
+.inputField {
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  background-color: #fff; /* White background */
+  color: #333; /* Dark text color */
+}
+
+.icons {
+  color: #cf1b1b;
+  padding-right: 10px; /* Light blue color */
+  font-size: 24px; /* Adjust the size as needed */
+}
+
+/* Icon inside input */
+.inputWithIcon .fa-icon {
+  position: absolute;
+  left: 10px;
+  color: #888;
+}
+
+/* Suggestions container */
+.suggestionsContainer {
+  position: absolute;
+  z-index: 1000;
+  width: calc(100% - 4px);
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  top: calc(100% + 5px);
+  left: 0;
+}
+
+/* Individual suggestion item */
+.suggestionItem {
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
 }
 
 /* Highlight suggestion item on hover */
 .suggestionItem:hover {
-  background-color: #f8f8f8;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  background-color: #f0f0f0;
 }
 
-.loaderContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed; /* or absolute */
-  top: 0;
-  left: 0;
+/* Round trip checkbox */
+.roundTripContainer {
   width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8); /* Optional: for a slight dimming effect */
-  z-index: 1000; /* Ensures the loader is above other content */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.loader {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 2s linear infinite;
+/* Where to heading */
+.whereToHeading {
+  width: 100%;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Search button */
+.searchButton {
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #4a90e2; /* Light blue button */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: none;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.searchButton:hover {
+  background-color: #357ebd; /* Darker shade on hover */
+}
+/* Checkbox container */
+.roundTripContainer {
+  display: flex;
+  align-items: center;
+  
+  margin-bottom: 4px; /* Add some space below */
+  padding-left: 30px;
+}
+
+/* Label for the checkbox */
+.roundTripLabel {
+  margin-left: 10px; /* Add some space between checkbox and label */
+  font-size: 1.3rem;
+  color: #3dbb5c; /* White text color */
+  font-weight: 800;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Custom checkbox style */
+.roundTripCheckbox {
+  appearance: none;
+  width: 22px; /* Adjust size as needed */
+  height: 22px; /* Adjust size as needed */
+  border: 2px solid #fff; /* White border */
+  border-radius: 4px; /* Rounded corners */
+  background-color: transparent; /* Transparent background */
+  outline: none; /* Remove default focus outline */
+  cursor: pointer;
+}
+
+/* Custom checkbox checked state */
+.roundTripCheckbox:checked {
+  background-color: #fff; /* White background when checked */
+}
+
+/* Custom checkbox checked state - inner dot */
+.roundTripCheckbox:checked::after {
+  content: '';
+  display: block;
+  width: 10px; /* Adjust size of inner dot */
+  height: 10px; /* Adjust size of inner dot */
+  background-color: #4a90e2; /* Light blue color */
+  border-radius: 50%; /* Circle */
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
+/* Adjustments for smaller screens */
 @media (max-width: 768px) {
-  .suggestionsContainer {
-    width: calc(100% - 20px); /* Example adjustment */
+  .inputWithIcon {
+    width: calc(100% - 20px);
   }
+  .formContainer {
+    padding: 15px;
+  }
+  .chooseairportDate{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
 }

@@ -10,6 +10,7 @@ import styles from "./SearchForm.module.css";
 import TequilaContext from '../../Contexts/Tequila/TequilaContext';
 import { getAirportCodeByName } from '../../utils/airportUtils'; // adjust the path as necessary
 import FlightCard from '../FlightCard/FlightCard';
+import LogoContainer from '../logo/LogoContainer';
 
 
 const SearchForm = () => {
@@ -150,16 +151,23 @@ const SearchForm = () => {
 
   return (
     <div className={styles.searchFormWrapper}>
+      <LogoContainer/>
       <form className={styles.formContainer} onSubmit={handleSubmit}>
+      <div className={styles.roundTripContainer}>
+  <input
+    type="checkbox"
+    checked={searchParams.isRoundTrip}
+    onChange={handleRoundTripChange}
+    className={styles.roundTripCheckbox}
+  />
+  <label className={styles.roundTripLabel}>Round Trip</label>
+</div>
+
+        <div className={styles.chooseairportDate}>
         <div className={styles.inputWithIcon}>
-          <input
-            type="checkbox"
-            checked={searchParams.isRoundTrip}
-            onChange={handleRoundTripChange}
-          /> Round Trip
-        </div>
-        <div className={styles.inputWithIcon}>
-          <FontAwesomeIcon icon={faPlaneDeparture} />
+          <FontAwesomeIcon icon={faPlaneDeparture} className={styles.icons} />
+        
+          
           <input
             ref={originInputRef}
             type="text"
@@ -181,7 +189,7 @@ const SearchForm = () => {
           )}
         </div>
         <div className={styles.inputWithIcon}>
-          <FontAwesomeIcon icon={faPlaneArrival}   />
+          <FontAwesomeIcon icon={faPlaneArrival} className={styles.icons}   />
           <input
             ref={destinationInputRef}
             type="text"
@@ -202,14 +210,18 @@ const SearchForm = () => {
             </div>
           )}
         </div>
+       
+       
+        
 
         <div className={styles.inputWithIcon}>
-          <DatePicker selected={searchParams.departureDate} onChange={date => setSearchParams(prev => ({ ...prev, departureDate: date }))} placeholderText="Select departure date" className={styles.inputField} />
+        <FontAwesomeIcon icon={faCalendarAlt} className={styles.icons} />
+          <DatePicker  selected={searchParams.departureDate} onChange={date => setSearchParams(prev => ({ ...prev, departureDate: date }))} placeholderText="Select departure date" className={styles.inputField} />
 
         </div>
         {searchParams.isRoundTrip && (
           <div className={styles.inputWithIcon}>
-
+            <FontAwesomeIcon icon={faCalendarAlt} className={styles.icons} />
             <DatePicker
 
               selected={searchParams.returnDate}
@@ -220,6 +232,7 @@ const SearchForm = () => {
           </div>
 
         )}
+        </div>
         <button type="submit" className={styles.searchButton}>
           Search
         </button>
