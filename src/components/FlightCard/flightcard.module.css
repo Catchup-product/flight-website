@@ -1,0 +1,103 @@
+.flightCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 36px;
+    margin: 30px;
+    background-color: rgb(197, 185, 139);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    cursor: pointer;
+  }
+  
+  .airlineLogo img {
+    height: 30px; /* Adjust as necessary */
+  }
+  
+  .flightTimes,
+  .flightRoute,
+  .flightPrice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .departureTime,
+  .arrivalTime {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 8px;
+  }
+  
+  .duration {
+    margin: 0 8px;
+  }
+  
+  .flightRoute span {
+    margin: 0 4px;
+    font-weight: bold;
+  }
+  
+  .flightPrice {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .flightPrice div {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  
+  .selectButton {
+    padding: 8px 16px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .selectButton:hover {
+    background-color: #003d82;
+  }
+  
+  .itinerary {
+    border-top: 1px solid #ccc;
+    padding: 10px;
+}
+
+.segment {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.flightDetails {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.priceDetails {
+    text-align: right;
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+.selectButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.selectButton:hover {
+    background-color: #45a049;
+}
